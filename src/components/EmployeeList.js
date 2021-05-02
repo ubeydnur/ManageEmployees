@@ -1,5 +1,5 @@
 import Employee from './Employee'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { EmployeeContext } from '../contexts/EmployeeContext'
 import AddForm from './AddForm'
@@ -12,6 +12,16 @@ const EmployeeList = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        handleClose();
+    }, [employees])
+
+    const myRef=useRef(null)
+
+    const onButtonClick=() =>{
+        myRef.current.focus()
+    }
 
     return (
         //React.Fragment
@@ -50,6 +60,8 @@ const EmployeeList = () => {
                     <AddForm />
                 </Modal.Body>
             </Modal>
+            <input ref={myRef} type="text"></input>
+            <button onClick={onButtonClick}>Focus Input</button>
         </>
     )
 }
