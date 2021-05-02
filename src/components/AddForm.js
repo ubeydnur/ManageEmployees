@@ -6,10 +6,23 @@ const AddForm = () => {
 
     const { addEmployee } = useContext(EmployeeContext)
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [phone, setPhone] = useState(""); 
+    // const [name, setName] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [address, setAddress] = useState("");
+    // const [phone, setPhone] = useState(""); 
+
+    const [newEmployee, setNewEmployee] = useState({
+        name: '',
+        email: '',
+        address: '',
+        phone: '',
+    })
+
+    const { name, email, address, phone } = newEmployee
+
+    const onInputChange = (e) => {
+        setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,7 +39,8 @@ const AddForm = () => {
                     placeholder="Enter name"
                     required
                     value={name}
-                    onChange={e => setName(e.target.value)} />
+                    // onChange={e => setName(e.target.value)} 
+                    onChange={e => onInputChange(e)} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Email address</Form.Label>
@@ -35,7 +49,8 @@ const AddForm = () => {
                     name="email"
                     placeholder="Enter email"
                     value={email}
-                    onChane={e => setEmail(e.target.value)}
+                    // onChane={e => setEmail(e.target.value)}
+                    onChange={e => onInputChange(e)}
                     required />
             </Form.Group>
             <Form.Group>
@@ -46,7 +61,8 @@ const AddForm = () => {
                     placeholder="Enter address"
                     rows={3}
                     value={address}
-                    onChane={e => setAddress(e.target.value)} />
+                    // onChane={e => setAddress(e.target.value)}
+                    onChange={e => onInputChange(e)} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Phone number</Form.Label>
@@ -55,7 +71,8 @@ const AddForm = () => {
                     name="phone"
                     placeholder="Enter phone"
                     value={phone}
-                    onChane={e => setPhone(e.target.value)} />
+                    // onChane={e => setPhone(e.target.value)}
+                    onChange={e => onInputChange(e)} />
             </Form.Group>
             <Button variant="success" type="submit" block>
                 Add New Employee
