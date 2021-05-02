@@ -1,6 +1,6 @@
 import { Form, Button } from 'react-bootstrap'
 import { EmployeeContext } from '../contexts/EmployeeContext'
-import { useContext, useState, useEffect} from 'react'
+import { useContext, useState} from 'react'
 
 const AddForm = () => {
 
