@@ -1,5 +1,5 @@
-import { Button, Modal } from 'react-bootstrap'
-import { useContext ,useState, useEffect } from 'react'
+import { Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { useContext, useState, useEffect } from 'react'
 import { EmployeeContext } from '../contexts/EmployeeContext'
 import EditForm from './EditForm'
 
@@ -25,19 +25,33 @@ const Employee = ({ employee }) => {
             <td>{employee.phone}</td>
             <td>
                 <div className='d-flex align-items-center'>
-                    <Button
-                        variant='outline-warning'
-                        className='mr-2'
-                        data-toggle="modal"
-                        onClick={handleShow}>
-                        <i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i>
-                    </Button>
-                    <Button
-                        variant="outline-danger"
-                        data-toggle="modal"
-                        onClick={() => deleteEmployee(employee.id)}>
-                        <i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-                    </Button>
+                    <OverlayTrigger
+                        overlay={
+                            <Tooltip id={`tooltip-top`}>
+                                Edit
+                            </Tooltip>
+                        }>
+                        <Button
+                            variant='outline-warning'
+                            className='mr-2'
+                            data-toggle="modal"
+                            onClick={handleShow}>
+                            <i className="material-icons">&#xE254;</i>
+                        </Button>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                        overlay={
+                            <Tooltip id={`tooltip-top`}>
+                                Delete
+                            </Tooltip>
+                        }>
+                        <Button
+                            variant="outline-danger"
+                            data-toggle="modal"
+                            onClick={() => deleteEmployee(employee.id)}>
+                            <i className="material-icons">&#xE872;</i>
+                        </Button>
+                    </OverlayTrigger>
                 </div>
             </td>
             <Modal show={show} onHide={handleClose}>
@@ -45,7 +59,7 @@ const Employee = ({ employee }) => {
                     <Modal.Title>Update Employee</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <EditForm theEmployee={employee}/>
+                    <EditForm theEmployee={employee} />
                 </Modal.Body>
             </Modal>
         </>

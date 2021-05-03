@@ -58,12 +58,14 @@ const EmployeeList = () => {
                     </div>
                 </div>
             </div>
+
             <Alert
                 show={showAlert}
                 variant="success"
             >
                 Employee List was successfully updated!
             </Alert>
+
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -86,7 +88,13 @@ const EmployeeList = () => {
                     }
                 </tbody>
             </table>
-            <Pagination pages={totalPagesNum} setCurrentPage={setCurrentPage} />
+
+            <Pagination
+                pages={totalPagesNum}
+                setCurrentPage={setCurrentPage} 
+                currentEmployees={currentEmployees}
+                sortedEmployees={sortedEmployees}/>
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton >
                     <Modal.Title>Add Employee</Modal.Title>
