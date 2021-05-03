@@ -1,6 +1,6 @@
 ## Manage Employee Projesi  
 
-[tutorialrepublic.com](https://www.tutorialrepublic.com/) temel html kodlarımı adresinden aldım.  
+Temel html kodlarımı [tutorialrepublic.com](https://www.tutorialrepublic.com/) adresinden aldım.  
 
 Projenin amacı ;
 - React.js
