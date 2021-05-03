@@ -15,6 +15,9 @@ const EmployeeContextProvider = (props) => {
         //https://www.npmjs.com/package/uuid ile id ler üretiyoruz
     )
 
+    // //isime göre sıralama yapıyoruz
+    // const sortedEmployees = employees.sort((a,b) =>(a.name<b.name ? -1 : 1))
+
     const addEmployee = (name, email, address, phone) => {
         setEmployees([
             ...employees,

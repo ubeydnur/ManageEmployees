@@ -1,6 +1,6 @@
 import Employee from './Employee'
-import { useContext, useState, useEffect} from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { useContext, useState, useEffect } from 'react'
+import { Button, Modal, Alert } from 'react-bootstrap'
 import { EmployeeContext } from '../contexts/EmployeeContext'
 import AddForm from './AddForm'
 
@@ -8,13 +8,25 @@ const EmployeeList = () => {
 
     const { employees } = useContext(EmployeeContext)
 
+    const [showAlert, setShowAlert] = useState(false)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    //const handleShowAlert = () => setShowAlert(true)
+
+    const handleShowAlert = () => {
+        setShowAlert(true)
+        setTimeout(() =>{
+            setShowAlert(false)
+        },2000)
+    }
 
     useEffect(() => {
         handleClose();
+        return () => {
+            handleShowAlert()
+        }
     }, [employees])
 
     // const myRef=useRef(null)
@@ -38,6 +50,12 @@ const EmployeeList = () => {
                     </div>
                 </div>
             </div>
+            <Alert
+                show={showAlert}
+                variant="success"
+                >
+                Employee List was successfully updated!
+            </Alert>
             <table className="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -51,9 +69,10 @@ const EmployeeList = () => {
                 <tbody>
                     {/* <Employee employees={employees} /> */}
                     {
-                        employees.map((employee)=>(
+                        // localeCompare ile isimleri sıralıyoruz.
+                        employees.sort((a, b) => a.name.localeCompare(b.name)).map((employee) => (
                             <tr key={employee.id}>
-                                <Employee employee={employee}/>
+                                <Employee employee={employee} />
                             </tr>
                         ))
                     }
@@ -73,3 +92,10 @@ const EmployeeList = () => {
     )
 }
 export default EmployeeList
+
+// //sort() içinde isimleri sıralıyoruz
+// employees.sort((a, b) => (a.name < b.name ? -1 : 1)).map((employee) => (
+//     <tr key={employee.id}>
+//         <Employee employee={employee} />
+//     </tr>
+// ))
