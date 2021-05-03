@@ -5,7 +5,7 @@ import EditForm from './EditForm'
 
 const Employee = ({ employee }) => {
 
-    const { deleteEmployee } = useContext(EmployeeContext)
+    const { dispatch } = useContext(EmployeeContext)
 
     const [show, setShow] = useState(false);
 
@@ -48,7 +48,7 @@ const Employee = ({ employee }) => {
                         <Button
                             variant="outline-danger"
                             data-toggle="modal"
-                            onClick={() => deleteEmployee(employee.id)}>
+                            onClick={() => dispatch({ type: 'remove_employee', id: employee.id })}>
                             <i className="material-icons">&#xE872;</i>
                         </Button>
                     </OverlayTrigger>
