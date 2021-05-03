@@ -1,5 +1,5 @@
 import Employee from './Employee'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect  } from 'react'
 import { Button, Modal, Alert } from 'react-bootstrap'
 import { EmployeeContext } from '../contexts/EmployeeContext'
 import AddForm from './AddForm'
@@ -42,6 +42,19 @@ const EmployeeList = () => {
     const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage
     const currentEmployees = sortedEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee)
     const totalPagesNum = Math.ceil(sortedEmployees.length / employeesPerPage)
+
+    // const reducer = (state, action) => {
+    //     switch (action.type) {
+    //         case 'increment':
+    //             return { count: state.count + 1 }
+    //         case 'decrement':
+    //             return { count: state.count - 1 }
+    //         default:
+    //             throw new Error('Hata')
+    //     }
+    // }
+    // const initialState = {count: 0}
+    // const [state, dispatch] = useReducer(reducer, initialState)
 
     return (
         //React.Fragment
@@ -91,9 +104,13 @@ const EmployeeList = () => {
 
             <Pagination
                 pages={totalPagesNum}
-                setCurrentPage={setCurrentPage} 
+                setCurrentPage={setCurrentPage}
                 currentEmployees={currentEmployees}
-                sortedEmployees={sortedEmployees}/>
+                sortedEmployees={sortedEmployees} />
+
+            {/* Count : {state.count}
+            <button onClick={()=>dispatch({type: 'increment'})}>+</button>
+            <button onClick={()=>dispatch({type: 'decrement'})}>-</button> */}
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton >
