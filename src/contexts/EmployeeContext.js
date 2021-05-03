@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 export const EmployeeContext = createContext()
@@ -15,8 +15,17 @@ const EmployeeContextProvider = (props) => {
         //https://www.npmjs.com/package/uuid ile id ler üretiyoruz
     )
 
+    useEffect(() => {
+        const employees=localStorage.getItem('employees')
+        setEmployees(JSON.parse(employees))
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem('employees', JSON.stringify(employees))
+    })
+
     // //isime göre sıralama yapıyoruz
-    const sortedEmployees = employees.sort((a,b) =>(a.name<b.name ? -1 : 1))
+    const sortedEmployees = employees.sort((a, b) => (a.name < b.name ? -1 : 1))
 
     const addEmployee = (name, email, address, phone) => {
         setEmployees([
@@ -34,7 +43,7 @@ const EmployeeContextProvider = (props) => {
     }
 
     return (
-        <EmployeeContext.Provider value={{ sortedEmployees, addEmployee, deleteEmployee , updateEmployee}}>
+        <EmployeeContext.Provider value={{ sortedEmployees, addEmployee, deleteEmployee, updateEmployee }}>
             {props.children}
         </EmployeeContext.Provider>
     )
